@@ -70,6 +70,7 @@ public class OptimisticLock {
                     break;
             }
         }*/
+
         System.out.println( "Finished! Result = " + map.get( key ).amount );
 
     }
