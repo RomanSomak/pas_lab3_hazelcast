@@ -22,6 +22,8 @@ public class OptimisticLock {
         map.putIfAbsent( key, new Value() );
         System.out.println( "Starting" );
 
+        //+
+
         for ( int k = 0; k < 1000; k++ ) {
             if ( k % 10 == 0 ) System.out.println( "At: " + k );
             for (; ; ) {
