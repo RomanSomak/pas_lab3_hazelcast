@@ -17,7 +17,7 @@ public class PessimisticLock {
         config.setClusterName("dev");
         HazelcastInstance hz = HazelcastClient.newHazelcastClient(config);
         IMap<String, Value> map = hz.getMap( "PessimisticLock" );
-        String key = "1";
+        String key = "3";
         map.putIfAbsent( key, new Value() );
         System.out.println( "Starting" );
         for ( int k = 0; k < 1000; k++ ) {
@@ -26,7 +26,7 @@ public class PessimisticLock {
                 Value value = map.get( key );
                 Thread.sleep( 10 );
                 value.amount++;
-                map.putIfAbsent( key, value );
+                map.put( key, value );
             } finally {
                 map.unlock( key );
             }

@@ -17,7 +17,7 @@ public class WithoutLock {
         config.setClusterName("dev");
         HazelcastInstance hz = HazelcastClient.newHazelcastClient(config);
         IMap<String, Value> map = hz.getMap( "WithoutLock" );
-        String key = "1";
+        String key = "2";
         map.putIfAbsent( key, new Value() );
         System.out.println( "Starting" );
         for ( int k = 0; k < 1000; k++ ) {
@@ -25,7 +25,7 @@ public class WithoutLock {
             Value value = map.get( key );
             Thread.sleep( 10 );
             value.amount++;
-            map.putIfAbsent( key, value );
+            map.put( key, value );
         }
         System.out.println( "Finished! Result = " + map.get(key).amount );
 
